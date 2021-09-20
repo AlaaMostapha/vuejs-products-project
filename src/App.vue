@@ -1,26 +1,48 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <Nav />
+    <main>
+      <router-view />
+    </main>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Nav from "./components/Nav.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Nav,
+  },
+  data() {
+    return {
+      teams: [
+        { id: 1, name: "Ahmed", job: "Back-end" },
+        { id: 2, name: "Mohamed", job: "Mobile" },
+        { id: 3, name: "Alaa", job: "Front-end" },
+        { id: 4, name: "Amera", job: "Front-end" },
+        { id: 1, name: "Ahmed", job: "Back-end" },
+        { id: 2, name: "Mohamed", job: "Mobile" },
+        { id: 3, name: "Alaa", job: "Front-end" },
+        { id: 4, name: "Amera", job: "Front-end" },
+        { id: 1, name: "Ahmed", job: "Back-end" },
+        { id: 2, name: "Mohamed", job: "Mobile" },
+        { id: 3, name: "Alaa", job: "Front-end" },
+        { id: 4, name: "Amera", job: "Front-end" },
+      ],
+    };
+  },
+  provide() {
+    return {
+      teams: this.teams,
+    };
+  },
+  methods: {},
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+main {
+  padding: 5% 15%;
 }
 </style>
