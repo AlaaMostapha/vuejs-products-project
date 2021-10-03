@@ -5,7 +5,6 @@
       <p>{{ $store.state.status }} - {{$store.state.count }}</p>
   </div>
 </template>
-
 <script>
 export default {
   name: "About",
