@@ -53,7 +53,7 @@
           <div class="col-5 form-container">
             <div class="row my-3">
               <p class="col-10 mb-0">Order Now</p>
-              <div class="col-2 text-end">
+              <div class="col-2 text-right">
                 <Button
                   :action="() => (openOrderNowForm = false)"
                   content="X"
