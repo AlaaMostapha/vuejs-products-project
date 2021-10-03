@@ -30,7 +30,7 @@
           />
           <Quantity
             class="col-md-8"
-            v-if="cart.find((item) => item.id == product.id)"
+            v-else
             :count="cart.find((item) => item.id == product.id).quantity"
             :item="product"
           ></Quantity>
