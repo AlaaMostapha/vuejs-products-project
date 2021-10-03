@@ -24,7 +24,7 @@
             </p>
             <div class="row justify-content-center">
               <span class="col-md-6 mb-2"> $ {{ product.price }}</span>
-               <p class="col-md-6">
+               <p class="col-md-6 text-right">
                 Rate : ⭐<i>{{ product.rating.rate }}</i>
               </p>
               <Button
@@ -34,9 +34,9 @@
                 :action="() => addItemToCart(product)"
               />
               <Quantity
-                class="col-10"
+                class="col-10 justify-content-center"
                 v-if="cart.find((item) => item.id == product.id)"
-                :count="product.quantity"
+                :count="cart.find((item) => item.id == product.id).quantity"
                 :item="product"
               ></Quantity>
             </div>
@@ -61,7 +61,9 @@ export default {
     Quantity,
   },
   data() {
-    return {};
+    return {
+      item:{}
+    };
   },
   computed: {
     ...mapState("common", ["isLoading"]),
