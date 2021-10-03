@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="isLoading">loading...</div>
-    <div class="row product-details-card">
+    <div v-if="isLoading" class='text-center'>loading...</div>
+    <div v-else class="row product-details-card">
       <div class="col-md-6 align-self-center">
         <img :src="product.image" alt="product img" class="img-fluid" />
       </div>
