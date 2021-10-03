@@ -7,23 +7,23 @@ function lazyLoad(view) {
     return () => import(`../Pages/${view}.vue`);
 }
 
-const routes = [{
+const routes = [
+    {
         path: "/",
-        component: lazyLoad("Home"),
+        component: lazyLoad("Products"),
     },
     {
-        path: "/about",
-        component: lazyLoad("About"),
+        path: "/products/:id",
+        component: lazyLoad("Product"),
+        name: "productDetails",
     },
     {
-        path: "/teams",
-        name: "teams",
-        component: lazyLoad("Teams"),
+        path: "/reviewOrder",
+        component: lazyLoad("ReviewOrder"),
     },
     {
-        path: "/teams/:id",
-        component: lazyLoad("TeamMemberDetails"),
-        name: "teamsDetails",
+        path: "/:Notfound(.*)",
+        component: lazyLoad("NotFound"),
     },
 ];
 

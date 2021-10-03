@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Vuex from "vuex";
 import common from './modules/common';
 import products from './modules/products';
-// import Product from './modules/product';
+import product from './modules/product';
+import cart from './modules/cart';
 
 Vue.use(Vuex)
 
@@ -13,8 +14,9 @@ const getters = ({})
 
 const modules = {
   common,
-  products
-  // Product
+  products,
+  product,
+  cart
 }
 
 export default new Vuex.Store({
