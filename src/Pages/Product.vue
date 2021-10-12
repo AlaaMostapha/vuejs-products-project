@@ -44,7 +44,7 @@
 import { mapState } from "vuex";
 import Button from "../components/Button.vue";
 import Quantity from "../components/Quantity.vue";
-
+import {addItemToCart} from "../utils/shared.js"
 export default {
   name: "Product",
   components: {
@@ -52,9 +52,6 @@ export default {
     Quantity,
   },
   methods: {
-    addItemToCart(product) {
-      this.$store.dispatch("cart/ADD_TO_CART", product);
-    },
   },
   computed: {
     ...mapState("common", ["isLoading"]),
@@ -63,6 +60,7 @@ export default {
   },
   created() {
     this.$store.dispatch("product/RECIEVE_PRODUCT", this.$route.params.id);
+    this.addItemToCart = addItemToCart
   },
 };
 </script>

@@ -52,6 +52,7 @@ import { mapState } from "vuex";
 import Card from "../components/Card.vue";
 import Button from "../components/Button.vue";
 import Quantity from "../components/Quantity.vue";
+import {addItemToCart} from "../utils/shared.js"
 
 export default {
   name: "Home",
@@ -71,12 +72,10 @@ export default {
     ...mapState("cart", ["cart"]),
   },
   methods: {
-    addItemToCart(product) {
-      this.$store.dispatch("cart/ADD_TO_CART", product);
-    },
   },
   created() {
     this.$store.dispatch("products/RECIEVE_PRODUCTS");
+    this.addItemToCart = addItemToCart
   },
 };
 </script>
