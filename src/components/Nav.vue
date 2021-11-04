@@ -24,7 +24,7 @@
             </b-dropdown-item>
           </template>
         </DropDown>
-        <DropDown title="menu" id="dropdown-right" right="{true}">
+        <DropDown title="menu" id="dropdown-right" right={true}>
           <template v-slot:button-content>
             <img
               class="img-fluid p-2"

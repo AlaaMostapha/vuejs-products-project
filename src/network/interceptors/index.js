@@ -27,8 +27,8 @@ export const errorHandler = (error) => {
     if (isHandlerEnabled(error.config)) {
         store.dispatch('common/IS_LOADING', false);
     }
-    if (error.response.status) {
-        switch (error.response.status) {
+    if (error?.response?.status) {
+        switch (error?.response?.status) {
             case 400:
                 //do something
                 break;

@@ -20,7 +20,7 @@ export default {
       type: String,
     },
     right:{
-        type: Object,
+        type: String,
     }
   },
   created() {
