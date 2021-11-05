@@ -5,11 +5,10 @@
       <b-navbar-nav>
         <b-nav-item to="/">Products</b-nav-item>
       </b-navbar-nav>
-      <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-item to="/reviewOrder">
-          <div class="text-center text-white">
-            Cart
+        <b-nav-item to="/cart">
+          <div class="text-white cart-parent">
+            <b-icon icon="cart-fill"></b-icon>
             <b-badge variant="light">{{ cart.length }}</b-badge>
           </div>
         </b-nav-item>
@@ -28,9 +27,6 @@ export default {
   computed: {
     ...mapState("cart", ["cart"]),
   },
-  created() {
-    console.log("created", this.cart.length);
-  },
 };
 </script>
 
@@ -42,6 +38,23 @@ nav {
   }
   .nav-link.router-link-active.router-link-exact-active {
     color: #fff;
+  }
+  .cart-parent {
+    position: relative;
+    text-align: center;
+    .badge {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      border: 3px solid;
+      padding: 0.09em 0.3em;
+      font-size: 70%;
+    }
+  }
+}
+@media (max-width: 992px) {
+  .cart-parent {
+    text-align: left!important;
   }
 }
 </style>
