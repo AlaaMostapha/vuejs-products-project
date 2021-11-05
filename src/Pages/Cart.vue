@@ -145,7 +145,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState } from "vuex";
 import * as Yup from "yup";
 import Table from "../components/Table.vue";
 import Quantity from "../components/Quantity.vue";

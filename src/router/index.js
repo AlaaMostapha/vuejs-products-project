@@ -18,8 +18,8 @@ const routes = [
         name: "productDetails",
     },
     {
-        path: "/reviewOrder",
-        component: lazyLoad("ReviewOrder"),
+        path: "/cart",
+        component: lazyLoad("Cart"),
     },
     {
         path: "/:Notfound(.*)",
