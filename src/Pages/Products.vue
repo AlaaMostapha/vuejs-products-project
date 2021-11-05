@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" >
     <div v-if="isLoading" class="text-center">loading...</div>
     <div v-else class="row products">
       <div

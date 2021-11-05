@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div  style="overflow-x:auto;">
     <table>
       <tr>
         <th v-for="(head, index) in headings" :key="index">
