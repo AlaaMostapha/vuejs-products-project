@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if='cart.length'>
+    <div v-if="cart.length">
       <Table :headings="headings">
         <template v-slot:table-body>
           <tbody v-for="(item, index) in cart" :key="index">
@@ -29,7 +29,7 @@
             </td>
           </tbody>
         </template>
-        <template v-slot:table-footer v-if='total'>
+        <template v-slot:table-footer v-if="total">
           <tr>
             <td colspan="5"><b>Total :</b></td>
             <td>{{ total.toFixed(2) }}</td>
@@ -38,14 +38,22 @@
       </Table>
       <div class="text-center m-3">
         <Button
-          class="add-to-cart-btn"
+          class="add-to-cart-btn col-2"
           :action="() => (openOrderNowForm = true)"
           content="Order Now"
         />
       </div>
     </div>
-    <div v-else>
-    <p class="text-center">Your cart is empty :( !</p>
+    <div v-else class="text-center empty-cart">
+      <p class="text-center font-weight-bold">Your cart is empty :( !</p>
+      <b-icon
+        icon="arrow-down"
+        animation="cylon-vertical"
+        font-scale="4"
+      ></b-icon>
+      <p class="text-center font-weight-bold my-2">
+        You can go to <b-link href="/">products</b-link> , enjoy shopping ^_^
+      </p>
     </div>
     <div v-if="openOrderNowForm" class="form-popup">
       <div class="container">
@@ -57,32 +65,33 @@
                 <Button
                   :action="() => (openOrderNowForm = false)"
                   content="X"
-                />
+                class="remove-btn"
+              />
               </div>
             </div>
             <div>
-              <div class="text-center m-5" v-if='orderNow'>
-                Your order is submitted ! :)
-                your address {{formDate.address}}
+              <div class="text-center m-5" v-if="orderNow">
+                Your order is submitted ! :) , it will reach you : <i>((address: {{ formData.address }}))</i> within 2 days
+                <p>Thank you :)</p>
               </div>
-              <form v-else class="login-form" @submit.prevent="submitData" >
+              <form v-else class="login-form" @submit.prevent="submitData">
                 <div class="form-group row mb-2">
                   <label class="form-label col-md-4" for="address"
                     >Address</label
                   >
-                  <div class='col-md-8'>
-                  <input
-                    id="address"
-                    name="address"
-                    type="text"
-                    v-model="formData.address"
-                    class="form-input w-100"
-                    :class="{'border border-danger':formErrors.address}"
-                    @blur="validate('address')"
-                  />
-                  <small class="text-danger">
-                    {{ formErrors.address }}
-                  </small>
+                  <div class="col-md-8">
+                    <input
+                      id="address"
+                      name="address"
+                      type="text"
+                      v-model="formData.address"
+                      class="form-input w-100"
+                      :class="{ 'border border-danger': formErrors.address }"
+                      @blur="validate('address')"
+                    />
+                    <small class="text-danger">
+                      {{ formErrors.address }}
+                    </small>
                   </div>
                 </div>
                 <div class="form-group row mb-2">
@@ -90,37 +99,37 @@
                     >Phone Number</label
                   >
                   <div class="col-md-8">
-                  <input
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    type="text"
-                    v-model="formData.phoneNumber"
-                    class='form-input w-100'
-                    :class="{'border border-danger':formErrors.phoneNumber}"
-                    @blur="validate('phoneNumber')"
-                  />
-                  <small class="text-danger">
-                    {{ formErrors.phoneNumber }}
-                  </small>
+                    <input
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      type="text"
+                      v-model="formData.phoneNumber"
+                      class="form-input w-100"
+                      :class="{
+                        'border border-danger': formErrors.phoneNumber,
+                      }"
+                      @blur="validate('phoneNumber')"
+                    />
+                    <small class="text-danger">
+                      {{ formErrors.phoneNumber }}
+                    </small>
                   </div>
-                  
                 </div>
                 <div class="form-group row mb-2">
                   <label class="form-label col-md-4" for="email">Email</label>
                   <div class="col-md-8">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    v-model="formData.email"
-                    @blur="validate('email')"
-                    class="form-input w-100"
-                    :class="{'border border-danger':formErrors.email}"
-
-                  />
-                  <small class="text-danger">
-                    {{ formErrors.email }}
-                  </small>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      v-model="formData.email"
+                      @blur="validate('email')"
+                      class="form-input w-100"
+                      :class="{ 'border border-danger': formErrors.email }"
+                    />
+                    <small class="text-danger">
+                      {{ formErrors.email }}
+                    </small>
                   </div>
                 </div>
                 <div class="text-center m-3">
@@ -142,9 +151,10 @@ import Table from "../components/Table.vue";
 import Quantity from "../components/Quantity.vue";
 import Button from "../components/Button.vue";
 const formSchema = Yup.object().shape({
-  address: Yup.string()
+  address: Yup.string().required(),
+  phoneNumber: Yup.number()
+    .typeError("you must specify a number")
     .required(),
-  phoneNumber: Yup.number().typeError('you must specify a number').required(),
   email: Yup.string()
     .required()
     .email(),
@@ -175,7 +185,6 @@ export default {
   },
   computed: {
     ...mapState("cart", ["cart", "total"]),
-    ...mapGetters(["cart/cart"]),
   },
   created() {
     this.$store.commit("cart/CALCULATE_TOTAL");
@@ -194,19 +203,22 @@ export default {
           this.formErrors[err.path] = err.message;
         });
     },
-   submitData() {
-      formSchema.validate(this.formData, { abortEarly: false })
+    submitData() {
+      formSchema
+        .validate(this.formData, { abortEarly: false })
         .then(() => {
-          console.log('submittedData', this.orderNow)
-          this.orderNow=true
+          this.orderNow = true;
+          this.$store.commit("cart/RESET_CART");
         })
         .catch((err) => {
           err.inner.forEach((error) => {
-            console.log('error',error)
-            this.formErrors = { ...this.formErrors, [error.path]: error.message };
+            this.formErrors = {
+              ...this.formErrors,
+              [error.path]: error.message,
+            };
           });
         });
-    }
+    },
   },
 };
 </script>
@@ -223,6 +235,10 @@ export default {
     background: #fff;
     position: absolute;
     top: 15%;
+    border: 5px solid yellow;
+    outline: 6px solid #eaeaea;
+    border-radius: 10px;
+    padding: 2rem 3rem;
   }
 }
 img {
@@ -236,5 +252,16 @@ img {
   background: #ff1800;
   color: #fff;
   box-shadow: 0px 2px 9px 0px #aaa8a8;
+}
+.empty-cart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: bold;
+  font-size: 20px;
+}
+input{
+  border-radius:5px;
 }
 </style>
