@@ -7,63 +7,12 @@
       </b-navbar-nav>
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <DropDown>
-         <template v-slot:button-content>
-            <img
-              class="img-fluid p-2"
-              :src="`https://lipis.github.io/flag-icon-css/flags/4x3/ar.svg`"
-              width="50"
-            />
-          </template>
-          <template v-slot:menu>
-            <b-dropdown-item :to="{ path: '/reviewOrder' }">
-              <div class="text-center">
-                Cart
-                <b-badge variant="light">{{ cart.length }}</b-badge>
-              </div>
-            </b-dropdown-item>
-          </template>
-        </DropDown>
-        <DropDown title="menu" id="dropdown-right" right={true}>
-          <template v-slot:button-content>
-            <img
-              class="img-fluid p-2"
-              :src="`https://lipis.github.io/flag-icon-css/flags/4x3/ar.svg`"
-              width="50"
-            />
-          </template>
-          <template v-slot:menu>
-            <b-dropdown-item>
-              View/Edit profile
-            </b-dropdown-item>
-            <b-dropdown-item>
-              Sign out
-            </b-dropdown-item>
-          </template>
-        </DropDown>
-        <DropDown>
-          <template v-slot:button-content>
-            <img
-              class="img-fluid p-2"
-              :src="`https://lipis.github.io/flag-icon-css/flags/4x3/ar.svg`"
-              width="50"
-            />
-          </template>
-          <b-dropdown-item @click.prevent="currentLang = 'nl'">
-            <img
-              class="img-fluid p-2"
-              src="https://lipis.github.io/flag-icon-css/flags/4x3/nl.svg"
-            />
-            NL
-          </b-dropdown-item>
-          <b-dropdown-item @click.prevent="currentLang = 'de'">
-            <img
-              class="img-fluid p-2"
-              src="https://lipis.github.io/flag-icon-css/flags/4x3/de.svg"
-            />
-            DE
-          </b-dropdown-item>
-        </DropDown>
+        <b-nav-item to="/reviewOrder">
+          <div class="text-center text-white">
+            Cart
+            <b-badge variant="light">{{ cart.length }}</b-badge>
+          </div>
+        </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -71,12 +20,8 @@
 
 <script>
 import { mapState } from "vuex";
-import DropDown from "./DropDown";
 export default {
   name: "Nav",
-  components: {
-    DropDown,
-  },
   data() {
     return {};
   },
