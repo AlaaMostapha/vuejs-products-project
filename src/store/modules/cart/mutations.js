@@ -32,5 +32,9 @@ export default {
             return prev + cur.totalPrice;
         }, 0);
         state.total = total
-    }
+    },
+    [types.RESET_CART](state) {
+        state.cart = [];
+        state.total=0;
+    },
 }
