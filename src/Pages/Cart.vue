@@ -58,7 +58,7 @@
     <div v-if="openOrderNowForm" class="form-popup">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-5 form-container">
+          <div class="col-lg-5 col-sm-10 form-container">
             <div class="row my-3">
               <p class="col-10 mb-0">Order Now</p>
               <div class="col-2 text-right">
@@ -79,7 +79,7 @@
                   <label class="form-label col-md-4" for="address"
                     >Address</label
                   >
-                  <div class="col-md-8">
+                  <div class="col-lg-8">
                     <input
                       id="address"
                       name="address"
@@ -98,7 +98,7 @@
                   <label class="form-label col-md-4" for="phoneNumber"
                     >Phone Number</label
                   >
-                  <div class="col-md-8">
+                  <div class="col-lg-8">
                     <input
                       id="phoneNumber"
                       name="phoneNumber"
@@ -117,7 +117,7 @@
                 </div>
                 <div class="form-group row mb-2">
                   <label class="form-label col-md-4" for="email">Email</label>
-                  <div class="col-md-8">
+                  <div class="col-lg-8">
                     <input
                       id="email"
                       name="email"
