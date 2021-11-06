@@ -70,7 +70,7 @@
               </div>
             </div>
             <div>
-              <div class="text-center m-5" v-if="orderNow">
+              <div class="text-center" v-if="orderNow">
                 Your order is submitted ! :) , it will reach you : <i>((address: {{ formData.address }}))</i> within 2 days
                 <p>Thank you :)</p>
               </div>
