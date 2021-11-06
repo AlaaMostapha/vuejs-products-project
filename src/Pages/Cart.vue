@@ -38,7 +38,7 @@
       </Table>
       <div class="text-center m-3">
         <Button
-          class="add-to-cart-btn col-2"
+          class="add-to-cart-btn col-lg-2 col-md-6"
           :action="() => (openOrderNowForm = true)"
           content="Order Now"
         />
